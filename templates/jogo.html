@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <div class="activity">
+      <h2 class="activity-name">{{atividade.name}}</h2>
+      <h4 class="activity-description">{{atividade.description}}</h4>
+    </div>
+    <div class="infos">
+      <h5>Pontuação: <span class="badge bg-secondary" id="points">0</span></h5>
+      <h5>Erros: <span class="badge bg-secondary" id="errors">0</span></h5>
+      <h5>Recorde: <span class="badge bg-secondary" id="record">0</span></h5>
+      <h5>Tempo: <span class="badge bg-secondary" id="time">0</span></h5>
+    </div>
+    <!-- Ínicio de jogo -->
+    <div id="start" class="box">
+      <a onclick="preparaJogo()">
+        <button type="button" class="btn btn-success">Jogar</button>
+      </a>
+    </div>
+    <!-- Preparação -->
+    <div id="start" class="box hide"></div>
+    <!-- Reset -->
+    <div id="reset" class="box hide">
+      <a onclick="preparaJogo()">
+        <button type="button" class="btn btn-success">Resetar</button>
+      </a>
+    </div>
+    <!-- Fim do jogo -->
+    <div id="end" class="box hide">
+      <h1>Fim do Jogo</h1>
+      <a onclick="preparaJogo()">
+        <button type="button" class="btn btn-success">Jogar</button>
+      </a>
+    </div>
+    <!-- Area do jogo -->
+    <div class="board-game hide" id="board-game">
+      <div class="items">
+        {% for item in items %}
+          <div class="item" category="{{item.category}}">
+          <h5>{{item.name}}</h5>
+          <p>{{item.description}}</p>
+          </div>
+        {% endfor %}
+      </div>
+      <div class="categorias">
+        {% for categoria in categorias %}
+          <div class="categoria" id="{{categoria.id}}">
+            <h4>{{categoria.name}}</h4>
+            <p>{{categoria.description}}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    console.log('{{tema}}')
+  </script>
+{% endblock content %}

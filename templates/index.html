@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class="container">
+    <h2 class="title primary-color">Temas</h2>
+    <p class="subtitle secondary-color">Escolha um tema para jogar:</p>
+    {% for tema in temas %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{tema.name}}</h5>
+          <p class="card-text">{{tema.description}}</p>
+          <a href="/tema/{{tema.id}}" class="btn btn-primary">Jogar</a>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock content %}

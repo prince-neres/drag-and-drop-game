@@ -1,0 +1,51 @@
+.box {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+.infos {
+  display: flex;
+  flex-direction: row;
+  height: 15vh;
+  width: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.items {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.item {
+  margin: 10px;
+  padding: 10px;
+  background-color: aqua;
+  text-align: center;
+  align-items: center;
+}
+
+.categorias {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+}
+
+.categoria {
+  margin: 10px;
+  padding: 15px;
+  background-color: aquamarine;
+  text-align: center;
+  z-index: 1000;
+}

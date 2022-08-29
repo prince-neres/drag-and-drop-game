@@ -1,0 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  margin-top: 25px;
+}
+
+.card {
+  margin-right: 25px;
+}
