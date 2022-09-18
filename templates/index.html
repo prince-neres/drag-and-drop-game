@@ -8,7 +8,9 @@
         <div class="card-body">
           <h5 class="card-title">{{tema.name}}</h5>
           <p class="card-text">{{tema.description}}</p>
-          <a href="/tema/{{tema.id}}" class="btn btn-primary">Jogar</a>
+          <a href="/tema/{{tema.id}}" class="btn btn-primary">
+            <button onclick=gerarComponentes()>Jogar</button>
+          </a>
         </div>
       </div>
     {% endfor %}

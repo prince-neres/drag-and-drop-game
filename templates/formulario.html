@@ -1,21 +1,35 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="container">
-    <form>
+    <h2>Formulário de tema</h2>
+    <form class="needs-validation" novalidate>
+      <div class="mb-3 w-25">
+        <label for="name" class="form-label">Nome do Tema</label>
+        <input id="name" type="text" class="form-control" placeholder="Nome do tema" required>
+        <div class="invalid-feedback">
+          Esse campo não pode estar em branco
+        </div>
+      </div>
+
       <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <label for="description" class="form-label">Descrição</label>
+        <textarea class="form-control" id="description" rows="3" placeholder="Descrição para o tema" required></textarea>
+        <div class="invalid-feedback">
+          Esse campo não pode estar em branco
+        </div>
       </div>
+  
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Password</label>
-        <input type="password" class="form-control" id="exampleInputPassword1">
+        <label class="form-label">Categorias e Items</label>
+
+        <div id="groups" class="mb-3">
+          <button type="button" id="add-category" onclick="addCategory()" class="btn btn-success">
+            Adicionar Categoria
+          </button>
+        </div>
       </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+
+      <button class="btn btn-primary" onclick="createTheme()">Criar</button>
     </form>
   </
 {% endblock content %}

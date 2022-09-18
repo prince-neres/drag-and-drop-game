@@ -1,44 +1,8 @@
-import json
-from flask import Flask, Response, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS, cross_origin
-
-
-app = Flask(__name__)
-cors = CORS(app)
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:postgres@localhost/jogo'
-db = SQLAlchemy(app)
-
-
-class Atividade(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(50))
-  description = db.Column(db.String(1000))
-
-  def to_json(self):
-    return { 'id': self.id, 'name': self.name, 'description': self.description }
-
-
-class Categoria(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(50))
-  description = db.Column(db.String(1000))
-  activity = db.Column(db.Integer, db.ForeignKey('atividade.id'))
-
-  def to_json(self):
-    return { 'id': self.id, 'name': self.name, 'description': self.description }
-
-
-class Item(db.Model):
-  id = db.Column(db.Integer, primary_key=True)
-  name = db.Column(db.String(50))
-  description = db.Column(db.String(1000))
-  activity = db.Column(db.Integer, db.ForeignKey('atividade.id'))
-  category = db.Column(db.Integer, db.ForeignKey('categoria.id'))
-
-  def to_json(self):
-    return { 'id': self.id, 'name': self.name, 'description': self.description }
+from flask import render_template
+from flask_cors import cross_origin
+from configuration import app, db
+from models import Atividade, Categoria, Item
+from utils import gera_response
 
 
 @app.route('/', methods=['GET'])
@@ -60,7 +24,7 @@ def about():
   return render_template('sobre.html')
 
 
-@app.route('/tema/<id>')
+@app.route('/tema/<id>', methods=['GET'])
 @cross_origin()
 def theme(id):
   atividade = Atividade.query.filter_by(id=id).first()
@@ -69,7 +33,7 @@ def theme(id):
   return render_template('jogo.html', atividade=atividade, categorias=categorias, items=items)
 
 
-@app.route('/api/theme/<id>')
+@app.route('/api/theme/<id>', methods=['GET'])
 def get_theme(id):
   atividade = Atividade.query.filter_by(id=id).first()
   categorias = Categoria.query.filter_by(activity=id)
@@ -85,15 +49,14 @@ def get_theme(id):
   return gera_response(200, tema)
 
 
-def gera_response(status, content, mensage=False):
-    body = content
-    if(mensage):
-        body['mensage'] = mensage
-    return Response(json.dumps(body), status=status, mimetype='application/json')
+@app.route('/api/theme', methods=['POST'])
+def create_theme(theme):
+  tema = ''
+  return gera_response(200, tema)
+
 
 
 with app.app_context():
     db.create_all()
-
 
 app.run(debug=True)

@@ -1,23 +1,22 @@
 var url = window.location.href
-var theme = {}
 var theme_id = url.split("/").pop()
 var erros = 0
 var pontuacao = 0
 var tempo = 30
 var tempo_restante = 0
 var thread_tempo
+var theme
 
 
-/* Pega informações do tema e defini os elementos arrastáveis e soltáveis */
-$(document).ready(function () {
-    $.ajax({
-    url: `http://localhost:3000/api/theme/${theme_id}`,
-    type: 'GET',
-    dataType: 'json',
-    success: function(res) {
-      theme = res
-    }
-  })
+/* Começa contagem regressiva de 3 segundos para o início do jogo */
+async function preparaJogo () {
+  await getTheme(theme_id).then(data => theme = data)
+  $('#start').removeClass('hide')
+  tempo_preparar = 3
+  $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
+  thread_tempo = setInterval(function () {
+      preparacao()
+  }, 1000)
 
   $('.item').draggable(
   {
@@ -35,17 +34,6 @@ $(document).ready(function () {
       drop: itemDrop
     }
   )
-})
-
-
-/* Começa contagem regressiva de 3 segundos para o início do jogo */
-const preparaJogo = () => {
-  $('#start').removeClass('hide')
-  tempo_preparar = 3
-  $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
-  thread_tempo = setInterval(function () {
-      preparacao()
-  }, 1000)
 }
 
 
