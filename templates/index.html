@@ -8,9 +8,32 @@
         <div class="card-body">
           <h5 class="card-title">{{tema.name}}</h5>
           <p class="card-text">{{tema.description}}</p>
-          <a href="/tema/{{tema.id}}" class="btn btn-primary">
-            <button onclick=gerarComponentes()>Jogar</button>
+          <a href="/tema/{{tema.id}}">
+            <button class="btn btn-success"
+              onclick=gerarComponentes()
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              data-bs-title="Jogar tema">
+              <b>Jogar</b>
+            </button>
           </a>
+          <a href="/editar/{{tema.id}}">
+            <button class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              data-bs-title="Editar tema"
+            >
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+          </a>
+          <button class="btn btn-danger"
+            onclick="removerTema('{{tema.id}}')"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            data-bs-title="Remover Tema"
+          >
+            <i class="bi bi-trash-fill"></i>
+          </button>
         </div>
       </div>
     {% endfor %}

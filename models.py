@@ -7,7 +7,9 @@ class Atividade(db.Model):
   description = db.Column(db.String(1000))
 
   def to_json(self):
-    return { 'id': self.id, 'name': self.name, 'description': self.description }
+    return { 'id': self.id,
+             'name': self.name,
+             'description': self.description }
 
 
 class Categoria(db.Model):
@@ -17,7 +19,10 @@ class Categoria(db.Model):
   activity = db.Column(db.Integer, db.ForeignKey('atividade.id'))
 
   def to_json(self):
-    return { 'id': self.id, 'name': self.name, 'description': self.description }
+    return { 'id': self.id,
+             'name': self.name,
+             'activity_id' : self.activity,
+             'description': self.description }
 
 
 class Item(db.Model):
@@ -28,4 +33,8 @@ class Item(db.Model):
   category = db.Column(db.Integer, db.ForeignKey('categoria.id'))
 
   def to_json(self):
-    return { 'id': self.id, 'name': self.name, 'description': self.description }
+    return { 'id': self.id,
+             'name': self.name,
+             'description': self.description,
+             'activity_id' : self.activity,
+             'category_id': self.category }
