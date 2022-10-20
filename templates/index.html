@@ -8,16 +8,16 @@
         <div class="card-body">
           <h5 class="card-title">{{tema.name}}</h5>
           <p class="card-text">{{tema.description}}</p>
-          <a href="/tema/{{tema.id}}">
+          <a href="/tema/{{tema._id}}">
             <button class="btn btn-success"
-              onclick=gerarComponentes()
+              onclick=guardaTema("{{tema}}")
               data-bs-toggle="tooltip"
               data-bs-placement="bottom"
               data-bs-title="Jogar tema">
               <b>Jogar</b>
             </button>
           </a>
-          <a href="/editar/{{tema.id}}">
+          <a href="/editar/{{tema._id}}">
             <button class="btn btn-primary"
               data-bs-toggle="tooltip"
               data-bs-placement="bottom"

@@ -1,3 +1,8 @@
+function guardaTema(tema) {
+  console.log(tema)
+}
+
+
 async function getTheme(theme_id) {  
   const response = await fetch(`http://localhost:3000/api/theme/${theme_id}`)
   let theme = await response.json()

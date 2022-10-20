@@ -1,28 +1,46 @@
-{% extends 'base.html' %}
-{% block content %}
-  <div class="container">
-    <h2>Formulário de tema</h2>
-    <form class="needs-validation" novalidate>
-      <div class="mb-3 w-25">
-        <label for="name" class="form-label"><strong>Nome do Tema</strong></label>
-        <input id="name" type="text" class="form-control" placeholder="Nome do tema" required>
-        <div class="invalid-feedback">Esse campo não pode estar em branco</div>
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h2>Formulário de tema</h2>
+  <form class="needs-validation" novalidate>
+    <div class="mb-3 w-25">
+      <label for="name" class="form-label"><strong>Nome do Tema</strong></label>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        placeholder="Nome do tema"
+        required
+      />
+      <div class="invalid-feedback">Esse campo não pode estar em branco</div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label"
+        ><strong>Descrição</strong></label
+      >
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        placeholder="Descrição para o tema"
+        required
+      ></textarea>
+      <div class="invalid-feedback">Esse campo não pode estar em branco</div>
+    </div>
+    <div class="mb-3">
+      <label class="form-label"><strong>Categorias e Items</strong></label>
+      <p>Crie as categorias do tema e adicionae os seus items.</p>
+      <div id="groups" class="mb-3">
+        <button
+          type="button"
+          id="add-category"
+          onclick="addCategory()"
+          class="btn btn-success"
+        >
+          Adicionar Categoria
+        </button>
       </div>
-      <div class="mb-3">
-        <label for="description" class="form-label"><strong>Descrição</strong></label>
-        <textarea class="form-control" id="description" rows="3" placeholder="Descrição para o tema" required></textarea>
-        <div class="invalid-feedback">Esse campo não pode estar em branco</div>
-      </div>
-      <div class="mb-3">
-        <label class="form-label"><strong>Categorias e Items</strong></label>
-        <p>Crie as categorias do tema e adicionae os seus items.</p>
-        <div id="groups" class="mb-3">
-          <button type="button" id="add-category" onclick="addCategory()" class="btn btn-success">
-            Adicionar Categoria
-          </button>
-        </div>
-      </div>
-      <button class="btn btn-primary" onclick="criarTema()">Criar</button>
-    </form>
-  </div>
+    </div>
+    <button class="btn btn-primary" onclick="criarTema()">Criar</button>
+  </form>
+</div>
 {% endblock content %}

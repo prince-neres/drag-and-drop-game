@@ -1,40 +1,92 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="container">
   <h2>Formulário de tema</h2>
   <form class="needs-validation" novalidate>
     <div class="mb-3 w-25">
       <label for="name" class="form-label"><strong>Nome do Tema</strong></label>
-      <input id="name" theme-id="{{tema.atividade.id}}" type="text" class="form-control" placeholder="Nome do tema" value="{{tema.atividade.name}}" required>
-      <div class="invalid-feedback"> Esse campo não pode estar em branco </div>
+      <input
+        id="name"
+        type="text"
+        class="form-control"
+        placeholder="Nome do tema"
+        value="{{tema.name}}"
+        required
+      />
+      <div class="invalid-feedback">Esse campo não pode estar em branco</div>
     </div>
     <div class="mb-3">
-      <label for="description" class="form-label"><strong>Descrição</strong></label>
-      <textarea class="form-control" id="description" rows="3" placeholder="Descrição para o tema" required>{{tema.atividade.description}}</textarea>
+      <label for="description" class="form-label"
+        ><strong>Descrição</strong></label
+      >
+      <textarea
+        class="form-control"
+        id="description"
+        rows="3"
+        placeholder="Descrição para o tema"
+        required
+      >
+        {{tema.description}}
+      </textarea>
       <div class="invalid-feedback">Esse campo não pode estar em branco</div>
     </div>
     <div class="mb-3">
       <label class="form-label"><strong>Categorias e Items</strong></label>
       <p>Crie as categorias do tema e adicione os seus items.</p>
       <div id="groups" class="mb-3">
-        {% with categorias=tema['categorias'] %}
-          {% for categoria in categorias %}
-            <div id="category-input" category-id="{{categoria.id}}">
-              <button type="button" id="remove-category" class="btn btn-danger" onclick="removeCategory(this)"><i class="bi bi-trash-fill"></i></button>
-              <input id="category-name" class="form-control" placeholder="Categoria" value="{{categoria.name}}" required />
-              <button type="button" id="add-item" onclick="addItem(this)" class="btn btn-primary"><i class="bi bi-plus-square"></i></button>
-              {% with items=categoria['items'] %}
-                {% for item in items %}
-                  <div id="item-input" item-id="{{item.id}}">
-                    <input id="item-name" class="form-control" placeholder="Item da Categoria" value="{{item.name}}" required />
-                    <button type="button" id="remove-item"  class="btn btn-danger" onclick="removeItem(this)"><i class="bi bi-trash-fill"></i></button>
-                  </div>
-                {% endfor %}
-              {% endwith %}
-            </div>
-          {% endfor %}
-        {% endwith %}
-        <button type="button" id="add-category" class="btn btn-success" onclick="addCategory()">Adicionar Categoria</button>
+        {% with categories=tema.categories %} {% for category in categories %}
+        <div id="category-input">
+          <button
+            type="button"
+            id="remove-category"
+            class="btn btn-danger"
+            onclick="removeCategory(this)"
+          >
+            <i class="bi bi-trash-fill"></i>
+          </button>
+          <input
+            id="category-name"
+            class="form-control"
+            placeholder="Categoria"
+            value="{{category.name}}"
+            required
+          />
+          <button
+            type="button"
+            id="add-item"
+            onclick="addItem(this)"
+            class="btn btn-primary"
+          >
+            <i class="bi bi-plus-square"></i>
+          </button>
+          {% with items=category['items'] %} {% for item in items %}
+          <div id="item-input">
+            <input
+              id="item-name"
+              class="form-control"
+              placeholder="Item da Categoria"
+              value="{{item.name}}"
+              required
+            />
+            <button
+              type="button"
+              id="remove-item"
+              class="btn btn-danger"
+              onclick="removeItem(this)"
+            >
+              <i class="bi bi-trash-fill"></i>
+            </button>
+          </div>
+          {% endfor %} {% endwith %}
+        </div>
+        {% endfor %} {% endwith %}
+        <button
+          type="button"
+          id="add-category"
+          class="btn btn-success"
+          onclick="addCategory()"
+        >
+          Adicionar Categoria
+        </button>
       </div>
     </div>
     <button class="btn btn-primary" onclick="editarTema()">Editar</button>

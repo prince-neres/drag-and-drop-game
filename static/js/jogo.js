@@ -6,11 +6,19 @@ var tempo = 30
 var tempo_restante = 0
 var thread_tempo
 var theme
+var tema = localStorage.getItem('tema')
 
 
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
-async function preparaJogo () {
-  await getTheme(theme_id).then(data => theme = data)
+function preparaJogo () {
+  /* Criar request para pegar tema da api  */
+
+
+
+
+
+
+
   $('#start').removeClass('hide')
   tempo_preparar = 3
   $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')

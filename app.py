@@ -1,52 +1,122 @@
-from flask import render_template
-from flask_cors import cross_origin
-from configuration import app, db
-from models import Atividade, Categoria, Item
-from utils import gera_response, list_temas, get_tema
+from flask import Flask, render_template, request, jsonify, redirect, url_for
+import database as dbase  
+from datetime import datetime
+from bson import ObjectId
+from theme import Theme
+
+db = dbase.dbConnection()
+app = Flask(__name__)
 
 
+# Lista todos temas
 @app.route('/', methods=['GET'])
-@cross_origin()
 def home():
-  temas = list_temas()
-  return render_template('index.html', temas=temas)
+    themes = db['themes']
+    themes = themes.find()
+    return render_template('index.html', temas=themes)
 
 
+# Template de jogo
+@app.route('/tema/<string:id>', methods=['GET'])
+def game(id):
+    themes = db['themes']
+    theme = themes.find_one({"_id": ObjectId(id)})
+    categories = theme['categories']
+    items = []
+
+    for category in categories:
+        for item in category:
+            items.append(item)
+
+    return render_template('jogo.html', tema=theme, categories=categories, items=items)
+
+
+# Formulário para criação de novo tema
 @app.route('/formulario', methods=['GET'])
-@cross_origin()
 def form():
   return render_template('formulario.html')
 
 
-@app.route('/editar/<int:id>', methods=['GET'])
-@cross_origin()
+# Template para edição de tema
+@app.route('/editar/<string:id>', methods=['GET'])
 def update(id):
-  tema = get_tema(id)
-  return render_template('edicao.html', tema=tema)
+  themes = db['themes']
+  theme = themes.find_one({"_id": ObjectId(id)})
+  return render_template('edicao.html', tema=theme)
 
 
+# Template sobre aplicação de desenvolvedores
 @app.route('/sobre', methods=['GET'])
-@cross_origin()
 def about():
   return render_template('sobre.html')
 
 
-@app.route('/tema/<id>', methods=['GET'])
-@cross_origin()
-def theme(id):
-  atividade = Atividade.query.filter_by(id=id).first()
-  categorias = Categoria.query.filter_by(activity=id)
-  items = Item.query.filter_by(activity=id)
-  return render_template('jogo.html', atividade=atividade, categorias=categorias, items=items)
+# Rota para criação de tema
+@app.route('/create_theme', methods=['POST'])
+def create_theme():
+  now = datetime.now()
+  themes = db['themes']
+  data = request.get_json()
+  data['created_date'] = now
+  data['updated_date'] = now
+
+  if data:
+    themes.insert_one(data)
+    resp = jsonify(success=True)
+    return resp
+  else:
+    return notFound()
 
 
-@app.route('/api/theme', methods=['POST'])
-def create_theme(theme):
-  tema = ''
-  return gera_response(200, tema)
+# Rota para atualização de tema
+@app.route('/update_theme/<string:id>', methods=['PUT'])
+def update_theme(id):
+  data = request.get_json()
+  now = datetime.now()
+  themes = db.themes
+
+  if data:
+    theme = {
+      "$set": {
+        "name": data['name'],
+        "description": data['description'],
+        "categories": data['categories'],
+        "updated_date": now
+      }
+    }
+
+    themes.update_one({"_id": ObjectId(id)}, theme)
+    resp = jsonify(success=True)
+    return resp
+  else:
+    return notFound()
 
 
-with app.app_context():
-    db.create_all()
+# Rota para remoção de tema
+@app.route('/delete_theme/<string:id>', methods=['DELETE'])
+def delete_theme(id):
+  themes = db.themes
+  theme = themes.find_one({"_id": ObjectId(id)})
 
-app.run(debug=True)
+  if theme:
+    themes.delete_one({"_id": ObjectId(id)})
+    resp = jsonify(success=True)
+    return resp
+  else:
+    return notFound()
+
+
+# Response para erros
+@app.errorhandler(404)
+def notFound(error=None):
+    message ={
+        'message': 'No encontrado ' + request.url,
+        'status': '404 Not Found'
+    }
+    response = jsonify(message)
+    response.status_code = 404
+    return response
+
+
+if __name__ == '__main__':
+    app.run(debug=True, port=3000)
