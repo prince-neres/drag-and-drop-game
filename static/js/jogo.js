@@ -10,7 +10,7 @@ var tema = localStorage.getItem('tema')
 
 
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
-function preparaJogo () {
+function prepara_jogo () {
   /* Criar request para pegar tema da api  */
 
 
@@ -58,18 +58,18 @@ const preparacao = () => {
   if (tempo_preparar < 0) {
       clearInterval(thread_tempo)
       tempo_preparar = 3
-      comecarJogo()
+      comecar_jogo()
       return
   }
 }
 
 
 /* Começa o jogo adicionando componentes do mesmo e removendo não necessários */
-const comecarJogo = () => {
+const comecar_jogo = () => {
   $('.box').addClass('hide')
   $('#board-game').removeClass('hide')
   $('#reset').removeClass('hide')
-  iniciarContador()
+  iniciar_contador()
 }
 
 
@@ -85,7 +85,7 @@ function itemDrop(event, ui) {
     ui.draggable.draggable('option', 'revert', false)
     pontuacao++
     $('#points').text(pontuacao)
-    pontuacao >= theme.items.length ? fimJogo() : console.log('AINDA NÃO')
+    pontuacao >= theme.items.length ? fim_jogo() : console.log('AINDA NÃO')
   } else {
     erros++
     $('#errors').text(erros)
@@ -94,40 +94,40 @@ function itemDrop(event, ui) {
 
 
 /* Inicia contador do jogo */
-const iniciarContador = () => {
+const iniciar_contador = () => {
     tempo_restante = tempo
     $("#time").text(tempo_restante)
     thread_tempo = setInterval(function () {
-        verificaContador()
+        verificar_contador()
     }, 1000)
 }
 
 
 /* Verifica se contador não chegou ao fim */
-const verificaContador = () => {
+const verificar_contador = () => {
     tempo_restante--
     $("#time").text(tempo_restante)
 
     if (tempo_restante <= 0) {
-        terminarContador()
-        fimJogo()
+        terminar_contador()
+        fim_jogo()
     }
 }
 
 
 /* Termina contador */
-const terminarContador = () => {
+const terminar_contador = () => {
     clearInterval(thread_tempo)
     tempo_restante = tempo
 }
 
 
 /* Acaba sessão do jogo limpando variáveis e removendo componentes */
-const fimJogo = () => {
+const fim_jogo = () => {
   $('#end').removeClass('hide')
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
-  terminarContador()
+  terminar_contador()
   pontuacao = 0
   erros = 0
 }

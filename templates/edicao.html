@@ -39,7 +39,7 @@
             type="button"
             id="remove-category"
             class="btn btn-danger"
-            onclick="removeCategory(this)"
+            onclick="remove_categoria(this)"
           >
             <i class="bi bi-trash-fill"></i>
           </button>
@@ -53,7 +53,7 @@
           <button
             type="button"
             id="add-item"
-            onclick="addItem(this)"
+            onclick="add_item(this)"
             class="btn btn-primary"
           >
             <i class="bi bi-plus-square"></i>
@@ -71,7 +71,7 @@
               type="button"
               id="remove-item"
               class="btn btn-danger"
-              onclick="removeItem(this)"
+              onclick="remove_item(this)"
             >
               <i class="bi bi-trash-fill"></i>
             </button>
@@ -83,13 +83,13 @@
           type="button"
           id="add-category"
           class="btn btn-success"
-          onclick="addCategory()"
+          onclick="add_categoria()"
         >
           Adicionar Categoria
         </button>
       </div>
     </div>
-    <button class="btn btn-primary" onclick="editarTema()">Editar</button>
+    <button class="btn btn-primary" onclick="editar_tema()">Editar</button>
   </form>
 </div>
 {% endblock content %}

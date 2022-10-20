@@ -10,7 +10,7 @@
           <p class="card-text">{{tema.description}}</p>
           <a href="/tema/{{tema._id}}">
             <button class="btn btn-success"
-              onclick=guardaTema("{{tema}}")
+              onclick=guarda_tema("{{tema}}")
               data-bs-toggle="tooltip"
               data-bs-placement="bottom"
               data-bs-title="Jogar tema">
@@ -27,7 +27,7 @@
             </button>
           </a>
           <button class="btn btn-danger"
-            onclick="removerTema('{{tema.id}}')"
+            onclick="remove_tema('{{tema.id}}')"
             data-bs-toggle="tooltip"
             data-bs-placement="bottom"
             data-bs-title="Remover Tema"
