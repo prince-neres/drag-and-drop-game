@@ -1,11 +1,6 @@
 const url_base = 'http://localhost:3000/'
 
 
-function garda_tema(tema) {
-  console.log(tema)
-}
-
-
 async function pegar_tema(theme_id) {  
   const response = await fetch(`http://localhost:3000/api/theme/${theme_id}`)
   let theme = await response.json()

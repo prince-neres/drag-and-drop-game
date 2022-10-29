@@ -12,7 +12,7 @@ var tema = localStorage.getItem('tema')
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
 function prepara_jogo () {
   /* Criar request para pegar tema da api  */
-
+  console.log(garda_tema('aerfae'))
 
 
 
@@ -27,7 +27,7 @@ function prepara_jogo () {
   }, 1000)
 
   $('.item').draggable(
-  {
+    {
       containment: '#board',
       stack: '.items div',
       cursor: 'move',
