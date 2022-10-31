@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import database as dbase  
 from datetime import datetime
 from bson import ObjectId
-
+from random import shuffle
 
 db = dbase.dbConnection()
 coll_themes = db['themes']
@@ -30,8 +30,9 @@ def game(id):
         items = []
 
         for category in categories:
-            for item in category:
+            for item in category['items']:
                 items.append(item)
+        shuffle(items)
 
         return render_template('jogo.html', tema=theme, categories=categories, items=items)
     else:
@@ -51,10 +52,10 @@ def update(id):
     theme = coll_themes.find_one({"_id": ObjectId(id)})
 
     if theme:
-      return render_template('edicao.html', tema=theme)
+        return render_template('edicao.html', tema=theme)
     else:
-      response = jsonify({"error": "Tema não encontrado!"})
-      return response
+        response = jsonify({"error": "Tema não encontrado!"})
+        return response
 
 
 # Template sobre aplicação de desenvolvedores

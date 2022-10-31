@@ -12,37 +12,31 @@
   </div>
   <!-- Ínicio de jogo -->
   <div id="start" class="box">
-    <a onclick="prepara_jogo()">
-      <button type="button" class="btn btn-success">Jogar</button>
-    </a>
+    <button id="start-game" type="button" class="btn btn-success">Jogar</button>
   </div>
   <!-- Preparação -->
   <div id="start" class="box hide"></div>
   <!-- Reset -->
   <div id="reset" class="box hide">
-    <a onclick="prepara_jogo()">
-      <button type="button" class="btn btn-success">Resetar</button>
-    </a>
+    <button id="start-game" type="button" class="btn btn-success">Resetar</button>
   </div>
   <!-- Fim do jogo -->
   <div id="end" class="box hide">
     <h1>Fim do Jogo</h1>
-    <a onclick="prepara_jogo()">
-      <button type="button" class="btn btn-success">Jogar</button>
-    </a>
+    <button id="start-game" type="button" class="btn btn-success">Jogar Novamente</button>
   </div>
   <!-- Area do jogo -->
   <div class="board-game hide" id="board-game">
     <div class="items">
       {% for item in items %}
-      <div class="item">
+      <div class="item" item="{{ item.name }}">
         <h5>{{item.name}}</h5>
       </div>
       {% endfor %}
     </div>
     <div class="categorias">
       {% for category in categories %}
-      <div class="categoria">
+      <div class="categoria" categoria="{{ category.name }}">
         <h4>{{category.name}}</h4>
       </div>
       {% endfor %}
@@ -50,7 +44,8 @@
   </div>
 </div>
 
-<script>
-  localStorage.setItem("tema", "{{tema}}");
+<script type=text/javascript>
+  const categories_json = {{ categories | tojson }}
+  localStorage.setItem("categories", JSON.stringify(categories_json))
 </script>
 {% endblock content %}

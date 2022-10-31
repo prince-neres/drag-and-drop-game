@@ -55,9 +55,15 @@
     <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-ui.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jogo.js') }}"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/jogo.js') }}"
+    ></script>
     <script src="{{ url_for('static', filename='js/formulario.js') }}"></script>
     <script src="{{ url_for('static', filename='js/api.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/utils.js') }}"></script>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/utils.js') }}"
+    ></script>
   </body>
 </html>
