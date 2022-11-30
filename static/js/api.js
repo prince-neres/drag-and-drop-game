@@ -1,13 +1,6 @@
 const url_base = 'http://localhost:3000/'
 
 
-async function pegar_tema(theme_id) {  
-  const response = await fetch(`http://localhost:3000/api/theme/${theme_id}`)
-  let theme = await response.json()
-  console.log(theme)
-  return theme
-}
-
 function criar_tema() {
   let name = $('#name').val()
   let description = $('#description').val()

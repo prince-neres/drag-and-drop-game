@@ -1,26 +1,26 @@
 import { count_items } from './utils.js'
-
-var url = window.location.href
-var theme_id = url.split("/").pop()
 var erros = 0
 var pontuacao = 0
 var tempo = 30
 var tempo_preparar = 0
 var tempo_restante = 0
 var thread_tempo
-var theme
 var categorias = JSON.parse(localStorage.getItem('categories'))
 var number_of_items = count_items(categorias)
-console.log(number_of_items)
+
 
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
 $('button[id^="start-game"]').on('click', function () {
-  $('.item').draggable({ revert: true })
-
-  /* Criar request para pegar tema da api  */
+  reset_game_vars()
+  $('#board-game').addClass('hide')
+  $('#end').addClass('hide')
+  $('#reset').addClass('hide')
   $('#start').removeClass('hide')
+  $(".item").animate({top: "0px",left: "0px"})
+
   tempo_preparar = 3
   $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
+
   thread_tempo = setInterval(function () {
       preparacao()
   }, 1000)
@@ -42,6 +42,15 @@ $('button[id^="start-game"]').on('click', function () {
     }
   )
 })
+
+
+/* Reseta variaveis do jogo */
+const reset_game_vars = () =>{
+  pontuacao = 0
+  erros = 0
+  tempo = 30
+  $('#points').text(pontuacao) &&  $('#errors').text(erros)
+}
 
 
 /* Verifica se a contagem regressiva terminou para começar o jogo */
@@ -80,13 +89,11 @@ function itemDrop(event, ui) {
   let item = card_item.attr('item')
   let categoria_obj = categorias.filter(c => c.name === categoria)
   let contains_item = categoria_obj[0].items.filter(i => i.name === item)
-  console.log(number_of_items)
 
   if(contains_item.length === 1){
     ui.draggable.draggable('option', 'revert', false)
     pontuacao++
-    $('#points').text(pontuacao)
-    pontuacao >= number_of_items ? fim_jogo() : console.log('AINDA NÃO')
+    pontuacao >= number_of_items ? fim_jogo() : $('#points').text(pontuacao)
   } else {
     erros++
     $('#errors').text(erros)
