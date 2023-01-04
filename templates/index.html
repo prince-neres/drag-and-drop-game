@@ -1,41 +1,43 @@
-{% extends 'base.html' %}
-{% block content %}
-  <div class="container">
-    <h2 class="title primary-color">Temas</h2>
-    <p class="subtitle secondary-color">Escolha um tema para jogar:</p>
-    {% for tema in temas %}
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{tema.name}}</h5>
-          <p class="card-text">{{tema.description}}</p>
-          <a href="/tema/{{tema._id}}">
-            <button class="btn btn-success"
-              onclick=guarda_tema("{{tema}}")
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              data-bs-title="Jogar tema">
-              <b>Jogar</b>
-            </button>
-          </a>
-          <a href="/editar/{{tema._id}}">
-            <button class="btn btn-primary"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              data-bs-title="Editar tema"
-            >
-              <i class="bi bi-pencil-fill"></i>
-            </button>
-          </a>
-          <button class="btn btn-danger"
-            onclick="remove_tema('{{tema.id}}')"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            data-bs-title="Remover Tema"
-          >
-            <i class="bi bi-trash-fill"></i>
-          </button>
-        </div>
-      </div>
-    {% endfor %}
+{% extends 'base.html' %} {% block content %}
+<div class="container">
+  <h2 class="title primary-color">Temas</h2>
+  <p class="subtitle secondary-color">Escolha um tema para jogar:</p>
+  {% for tema in temas %}
+  <div class="card" style="width: 18rem">
+    <div class="card-body">
+      <h5 class="card-title">{{tema.name}}</h5>
+      <p class="card-text">{{tema.description}}</p>
+      <a href="/tema/{{tema._id}}">
+        <button
+          class="btn btn-success"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          data-bs-title="Jogar tema"
+        >
+          <b>Jogar</b>
+        </button>
+      </a>
+      <a href="/editar/{{tema._id}}">
+        <button
+          class="btn btn-primary"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          data-bs-title="Editar tema"
+        >
+          <i class="bi bi-pencil-fill"></i>
+        </button>
+      </a>
+      <button
+        class="btn btn-danger"
+        onclick="remove_tema('{{tema.id}}')"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        data-bs-title="Remover Tema"
+      >
+        <i class="bi bi-trash-fill"></i>
+      </button>
+    </div>
   </div>
+  {% endfor %}
+</div>
 {% endblock content %}

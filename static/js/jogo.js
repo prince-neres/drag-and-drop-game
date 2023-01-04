@@ -4,21 +4,14 @@ var erros = 0
 var pontuacao = 0
 var tempo = 30
 var tempo_restante = 0
+var tempo_preparar = 0
 var thread_tempo
 var theme
 var tema = localStorage.getItem('tema')
 
 
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
-function prepara_jogo () {
-  /* Criar request para pegar tema da api  */
-  console.log(garda_tema('aerfae'))
-
-
-
-
-
-
+$('#start-game').click(function () {
   $('#start').removeClass('hide')
   $(".item").animate({top: "0px",left: "0px"})
 
@@ -45,7 +38,7 @@ function prepara_jogo () {
       drop: itemDrop
     }
   )
-}
+})
 
 
 /* Verifica se a contagem regressiva terminou para começar o jogo */
@@ -88,6 +81,7 @@ function itemDrop(event, ui) {
     ui.draggable.draggable('option', 'revert', false)
     pontuacao++
     $('#points').text(pontuacao)
+    console.log(theme.items)
     pontuacao >= theme.items.length ? fim_jogo() : console.log('AINDA NÃO')
   } else {
     erros++
