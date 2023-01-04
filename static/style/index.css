@@ -15,8 +15,18 @@ body {
 .container {
   margin-top: 20px;
   background: #a9a9a9;
+  
 }
 
 .card-body {
   text-align: center;
+}
+
+#menu-princ{
+
+}
+
+#menu-nav{
+  margin: 10px;
+  font-size: 20px;
 }

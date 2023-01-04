@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS, cross_origin
 import database as dbase  
 from datetime import datetime
 from bson import ObjectId
@@ -7,7 +8,8 @@ from random import shuffle
 db = dbase.dbConnection()
 coll_themes = db['themes']
 app = Flask(__name__)
-
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 # Lista todos temas
 @app.route('/', methods=['GET'])
@@ -66,6 +68,7 @@ def about():
 
 # Rota para criação de tema
 @app.route('/create_theme', methods=['POST'])
+@cross_origin()
 def create_theme():
     now = datetime.now()
     data = request.get_json()
@@ -89,6 +92,7 @@ def create_theme():
 
 # Rota para atualização de tema
 @app.route('/update_theme/<string:id>', methods=['PUT'])
+@cross_origin()
 def update_theme(id):
     data = request.get_json()
     now = datetime.now()
@@ -118,6 +122,7 @@ def update_theme(id):
 
 # Rota para remoção de tema
 @app.route('/delete_theme/<string:id>', methods=['DELETE'])
+@cross_origin()
 def delete_theme(id):
     theme = coll_themes.find_one({"_id": ObjectId(id)})
 
