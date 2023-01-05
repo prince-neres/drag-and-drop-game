@@ -79,7 +79,7 @@ def create_theme():
       
         try:
             coll_themes.insert_one(data)
-            response = jsonify({"success": f'Tema {data["name"]}criado com sucesso!'})
+            response = jsonify({"success": f'Tema {data["name"]} criado com sucesso!'})
             return response
         except Exception as e:
             response = jsonify({"error": f'Erro ao tentar criar tema: {e}!'})

@@ -29,5 +29,3 @@ const count_items = (categories) => {
 
   return number_of_items
 }
-
-export { count_items }
