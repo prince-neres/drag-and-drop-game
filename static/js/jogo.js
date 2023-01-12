@@ -1,23 +1,27 @@
 var url = window.location.href
-var theme_id = url.split("/").pop()
+var tema_id = url.split("/").pop()
 var erros = 0
 var pontuacao = 0
 var tempo = 30
 var tempo_restante = 0
 var tempo_preparar = 0
 var thread_tempo
-var theme
-var tema = localStorage.getItem('tema')
-
+var categorias = JSON.parse(localStorage.getItem('categories'))
+var items_count = 0
 
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
-$('#start-game').click(function () {
+$('[id="start-game"]').click(function () {
   $('#start').removeClass('hide')
   $(".item").animate({top: "0px",left: "0px"})
-
+  pontuacao = 0
+  $('#points').text(pontuacao)
+  erros = 0
+  $('#errors').text(erros)
+  $('#end').addClass('hide')
+  $('#reset').addClass('hide')
+  $('#board-game').addClass('hide')
   tempo_preparar = 3
   $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
-
   thread_tempo = setInterval(function () {
       preparacao()
   }, 1000)
@@ -66,6 +70,7 @@ const comecar_jogo = () => {
   $('#board-game').removeClass('hide')
   $('#reset').removeClass('hide')
   iniciar_contador()
+  items_count = conta_itens_tema()
 }
 
 
@@ -74,15 +79,12 @@ function itemDrop(event, ui) {
   var slotCategoria = $(this)
   var cardItem = ui.draggable
 
-  console.log(slotCategoria.attr('id'))
-  console.log(cardItem.attr('category'))
-
-  if(slotCategoria.attr('id') === cardItem.attr('category')){
+  if(slotCategoria.attr('name') === cardItem.attr('categoria')){
     ui.draggable.draggable('option', 'revert', false)
     pontuacao++
     $('#points').text(pontuacao)
-    console.log(theme.items)
-    pontuacao >= theme.items.length ? fim_jogo() : console.log('AINDA NÃO')
+
+    pontuacao >= items_count ? fim_jogo() : null
   } else {
     erros++
     $('#errors').text(erros)
@@ -119,12 +121,23 @@ const terminar_contador = () => {
 }
 
 
+const conta_itens_tema = () => {
+  let count = 0
+
+  for (let categoria of categorias) {
+    for(let item in categoria['items']) {
+      count++
+    }
+  }
+
+  return count
+}
+
 /* Acaba sessão do jogo limpando variáveis e removendo componentes */
 const fim_jogo = () => {
   $('#end').removeClass('hide')
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
+  salvar_pontuacao(tema_id, pontuacao, erros, tempo_restante)
   terminar_contador()
-  pontuacao = 0
-  erros = 0
 }

@@ -32,6 +32,7 @@
   background-color: aqua;
   text-align: center;
   align-items: center;
+  border-radius: 50%;
 }
 
 .categorias {

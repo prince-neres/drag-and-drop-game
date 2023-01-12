@@ -7,6 +7,7 @@ from random import shuffle
 
 db = dbase.dbConnection()
 coll_themes = db['themes']
+coll_scores = db['scores']
 app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
@@ -26,6 +27,11 @@ def home():
 @app.route('/tema/<string:id>', methods=['GET'])
 def game(id):
     theme = coll_themes.find_one({"_id": ObjectId(id)})
+    find_record = coll_scores.find({"theme_id":str(id)}).sort("final_score", -1).limit(1)
+    record = [record for record in find_record]
+    record = record[0] if record else 0
+
+    print(record)
 
     if theme:
         categories = theme['categories']
@@ -33,10 +39,11 @@ def game(id):
 
         for category in categories:
             for item in category['items']:
+                item['category'] = category['name']
                 items.append(item)
         shuffle(items)
 
-        return render_template('jogo.html', tema=theme, categories=categories, items=items)
+        return render_template('jogo.html', tema=theme, categories=categories, items=items, record=record)
     else:
         response = jsonify({"error": "Tema não encontrado!"})
         return response
@@ -133,6 +140,30 @@ def delete_theme(id):
 
     else:
         response = jsonify({"error": "Tema não foi encontrado!"})
+        return response
+
+
+# Rota para salvar pontuação
+@app.route('/save_score', methods=['POST'])
+@cross_origin()
+def save_score():
+    now = datetime.now()
+    data = request.get_json()
+
+    if data:
+        data['date'] = now
+        data['final_score'] = data['score'] + data['time'] - data['mistakes']
+
+        try:
+            coll_scores.insert_one(data)
+            response = jsonify({"success": f'Pontuação salva com sucesso!'})
+            return response
+        except Exception as e:
+            response = jsonify({"error": f'Erro ao salvar pontuação: {e}!'})
+            return response
+
+    else:
+        response = jsonify({"error": "Sem informaçãoes suficientes para salvar!"})
         return response
 
 

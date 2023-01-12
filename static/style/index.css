@@ -22,11 +22,9 @@ body {
   text-align: center;
 }
 
-#menu-princ{
-
-}
 
 #menu-nav{
   margin: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }

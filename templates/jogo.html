@@ -7,7 +7,7 @@
   <div class="infos">
     <h5>Pontuação: <span class="badge bg-secondary" id="points">0</span></h5>
     <h5>Erros: <span class="badge bg-secondary" id="errors">0</span></h5>
-    <h5>Recorde: <span class="badge bg-secondary" id="record">0</span></h5>
+    <h5>Recorde: <span class="badge bg-secondary" id="record">{{record.final_score or 0}}</span></h5>
     <h5>Tempo: <span class="badge bg-secondary" id="time">0</span></h5>
   </div>
   <!-- Ínicio de jogo -->
@@ -29,14 +29,14 @@
   <div class="board-game hide" id="board-game">
     <div class="items">
       {% for item in items %}
-      <div class="item" item="{{ item.name }}">
-        <h5>{{item.name}}</h5>
+      <div class="item" item="{{ item.name }}" categoria="{{ item.category }}">
+        <h5>{{ item.name }}</h5>
       </div>
       {% endfor %}
     </div>
     <div class="categorias">
       {% for category in categories %}
-      <div class="categoria" categoria="{{ category.name }}">
+      <div class="categoria" name="{{ category.name }}">
         <h4>{{category.name}}</h4>
       </div>
       {% endfor %}
