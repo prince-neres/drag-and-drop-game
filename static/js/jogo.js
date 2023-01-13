@@ -22,7 +22,7 @@ $('[id="start-game"]').click(function () {
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
   tempo_preparar = 3
-  $('#start').html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
+  $('#start').html('<b><p>Prepare-se...</p><h1>' + tempo_preparar + '</h1></b>')
   thread_tempo = setInterval(function () {
       preparacao()
   }, 1000)
@@ -51,9 +51,9 @@ const preparacao = () => {
   tempo_preparar--
 
   if (tempo_preparar == 0) {
-      $('#start').html('<p style="font-size:30px">Valendo...</p>')
+      $('#start').html('<b><p style="font-size:30px">Valendo...</p></b>')
   } else {
-      $('#start').html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
+      $('#start').html('<b><p>Prepare-se...</p><h1>' + tempo_preparar + '</h1></b>')
   }
 
   if (tempo_preparar < 0) {
