@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS, cross_origin
-import database as dbase  
+import database as dbase
+from services import validate_theme
 from datetime import datetime
 from bson import ObjectId
 from random import shuffle
@@ -19,15 +20,15 @@ def home():
         themes = coll_themes.find()
         return render_template('index.html', temas=themes)
     except Exception as e:
-        response = jsonify({"error": f'Erro ao encontrar temas: {e}!'})
+        response = jsonify({'error': f'Erro ao encontrar temas: {e}!'})
         return response
 
 
 # Template de jogo
 @app.route('/tema/<string:id>', methods=['GET'])
 def game(id):
-    theme = coll_themes.find_one({"_id": ObjectId(id)})
-    find_record = coll_scores.find({"theme_id":str(id)}).sort("final_score", -1).limit(1)
+    theme = coll_themes.find_one({'_id': ObjectId(id)})
+    find_record = coll_scores.find({'theme_id':str(id)}).sort('final_score', -1).limit(1)
     record = [record for record in find_record]
     record = record[0] if record else 0
 
@@ -45,26 +46,23 @@ def game(id):
 
         return render_template('jogo.html', tema=theme, categories=categories, items=items, record=record)
     else:
-        response = jsonify({"error": "Tema não encontrado!"})
+        response = jsonify({'error': 'Tema não encontrado!'})
         return response
 
 
-# Formulário para criação de novo tema
-@app.route('/formulario', methods=['GET'])
-def form():
-    return render_template('formulario.html')
-
-
-# Template para edição de tema
-@app.route('/editar/<string:id>', methods=['GET'])
-def update(id):
-    theme = coll_themes.find_one({"_id": ObjectId(id)})
-
-    if theme:
-        return render_template('edicao.html', tema=theme)
+# Templates para criação e edição de tema
+@app.route('/formulario/<string:id>', methods=['GET'])
+def form(id):
+    if id == 'novo':
+        return render_template('formulario.html')
     else:
-        response = jsonify({"error": "Tema não encontrado!"})
-        return response
+        theme = coll_themes.find_one({'_id': ObjectId(id)})
+
+        if theme:
+            return render_template('edicao.html', tema=theme)
+        else:
+            response = jsonify({'error': 'Tema não encontrado!'})
+            return response
 
 
 # Template sobre aplicação de desenvolvedores
@@ -79,21 +77,19 @@ def about():
 def create_theme():
     now = datetime.now()
     data = request.get_json()
+    validate, response = validate_theme(data)
 
-    if data:
+    if validate:
         data['created_date'] = now
         data['updated_date'] = now
-      
         try:
             coll_themes.insert_one(data)
-            response = jsonify({"success": f'Tema {data["name"]} criado com sucesso!'})
+            response = jsonify({'success': f'Tema {data["name"]} criado com sucesso!'})
             return response
         except Exception as e:
-            response = jsonify({"error": f'Erro ao tentar criar tema: {e}!'})
+            response = jsonify({'error': f'Erro ao tentar criar tema: {e}!'})
             return response
-
     else:
-        response = jsonify({"error": "Sem informaçãoes suficientes para criação!"})
         return response
 
 
@@ -103,27 +99,25 @@ def create_theme():
 def update_theme(id):
     data = request.get_json()
     now = datetime.now()
+    validate, response = validate_theme(data)
 
-    if data:
+    if validate:
         theme = {
-          "$set": {
-            "name": data['name'],
-            "description": data['description'],
-            "categories": data['categories'],
-            "updated_date": now
+          '$set': {
+            'name': data['name'],
+            'description': data['description'],
+            'categories': data['categories'],
+            'updated_date': now
           }
         }
-
         try:
-            coll_themes.update_one({"_id": ObjectId(id)}, theme)
-            response = jsonify({"success": "Tema atualizado com sucesso!"})
+            coll_themes.update_one({'_id': ObjectId(id)}, theme)
+            response = jsonify({'success': 'Tema atualizado com sucesso!'})
             return response
         except Exception as e:
-            response = jsonify({"error": f'erro ao tentar editar tema: {e}!'})
+            response = jsonify({'error': f'erro ao tentar editar tema: {e}!'})
             return response
-
     else:
-        response = jsonify({"error": "Sem dados para alterar!"})
         return response
 
 
@@ -131,15 +125,14 @@ def update_theme(id):
 @app.route('/delete_theme/<string:id>', methods=['DELETE'])
 @cross_origin()
 def delete_theme(id):
-    theme = coll_themes.find_one({"_id": ObjectId(id)})
+    theme = coll_themes.find_one({'_id': ObjectId(id)})
 
     if theme:
-        coll_themes.delete_one({"_id": ObjectId(id)})
-        response = jsonify({"success": "Tema deletado com sucesso!"})
+        coll_themes.delete_one({'_id': ObjectId(id)})
+        response = jsonify({'success': 'Tema deletado com sucesso!'})
         return response
-
     else:
-        response = jsonify({"error": "Tema não foi encontrado!"})
+        response = jsonify({'error': 'Tema não foi encontrado!'})
         return response
 
 
@@ -156,14 +149,13 @@ def save_score():
 
         try:
             coll_scores.insert_one(data)
-            response = jsonify({"success": f'Pontuação salva com sucesso!'})
+            response = jsonify({'success': f'Pontuação salva com sucesso!'})
             return response
         except Exception as e:
-            response = jsonify({"error": f'Erro ao salvar pontuação: {e}!'})
+            response = jsonify({'error': f'Erro ao salvar pontuação: {e}!'})
             return response
-
     else:
-        response = jsonify({"error": "Sem informaçãoes suficientes para salvar!"})
+        response = jsonify({'error': 'Sem informaçãoes suficientes para salvar!'})
         return response
 
 

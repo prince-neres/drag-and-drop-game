@@ -1,6 +1,7 @@
 const current_base = window.location.href
 const url_base = 'http://127.0.0.1:3000/'
 
+
 function criar_tema(event) {
   event.preventDefault()
   let name = $('#name').val()
@@ -21,7 +22,7 @@ function criar_tema(event) {
 
     $.each(items, function(i, l) {
       item_name = $(l).children('#item-name').val()
-      item_obj = { "name": item_name }
+      item_obj = {'name': item_name}
       category['items'].push(item_obj)
     })
 
@@ -29,11 +30,11 @@ function criar_tema(event) {
   })
 
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `${url_base}create_theme`,
     data: JSON.stringify(tema),
-    contentType:"application/json; charset=utf-8",
-    dataType:"json",
+    contentType:'application/json; charset=utf-8',
+    dataType:'json',
     success: function (response) {
       var alert = ''
       
@@ -57,6 +58,7 @@ function criar_tema(event) {
   })
 }
 
+
 function editar_tema(_id) {
   event.preventDefault()
   let name = $('#name').val()
@@ -77,7 +79,7 @@ function editar_tema(_id) {
 
     $.each(items, function(i, l) {
       item_name = $(l).children('#item-name').val()
-      item_obj = { "name": item_name }
+      item_obj = { 'name': item_name }
       category['items'].push(item_obj)
     })
 
@@ -85,11 +87,11 @@ function editar_tema(_id) {
   })
   
   $.ajax({
-    type: "PUT",
+    type: 'PUT',
     url: `${url_base}update_theme/${_id}`,
     data: JSON.stringify(tema),
-    contentType:"application/json; charset=utf-8",
-    dataType:"json",
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
     success: function (response) {
       var alert = ''
       
@@ -113,15 +115,17 @@ function editar_tema(_id) {
   })
 }
 
+
 function remover_tema(_id) {
   $.ajax({
-    type: "DELETE",
+    type: 'DELETE',
     url: `${url_base}delete_theme/${_id}`,
     success: function () {
       document.location.reload(true)
     }
   })
 }
+
 
 function salvar_pontuacao (_id, pontuacao, erros, tempo) {
   let req_obj = {}
@@ -131,11 +135,11 @@ function salvar_pontuacao (_id, pontuacao, erros, tempo) {
   req_obj.time = tempo
 
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: `${url_base}save_score`,
     data: JSON.stringify(req_obj),
-    contentType:"application/json; charset=utf-8",
-    dataType:"json",
+    contentType: 'application/json; charset=utf-8',
+    dataType: 'json',
     success: function () {
       console.log('Pontuação salva com sucesso!')
     }

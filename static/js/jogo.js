@@ -1,5 +1,5 @@
 var url = window.location.href
-var tema_id = url.split("/").pop()
+var tema_id = url.split('/').pop()
 var erros = 0
 var pontuacao = 0
 var tempo = 30
@@ -9,10 +9,11 @@ var thread_tempo
 var categorias = JSON.parse(localStorage.getItem('categories'))
 var items_count = 0
 
+
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
 $('[id="start-game"]').click(function () {
   $('#start').removeClass('hide')
-  $(".item").animate({top: "0px",left: "0px"})
+  $('.item').animate({top: '0px',left: '0px'})
   pontuacao = 0
   $('#points').text(pontuacao)
   erros = 0
@@ -21,7 +22,7 @@ $('[id="start-game"]').click(function () {
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
   tempo_preparar = 3
-  $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
+  $('#start').html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
   thread_tempo = setInterval(function () {
       preparacao()
   }, 1000)
@@ -50,9 +51,9 @@ const preparacao = () => {
   tempo_preparar--
 
   if (tempo_preparar == 0) {
-      $("#start").html('<p style="font-size:30px">Valendo...</p>')
+      $('#start').html('<p style="font-size:30px">Valendo...</p>')
   } else {
-      $("#start").html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
+      $('#start').html('<p>Prepare-se...</p><h1>' + tempo_preparar + '</h1>')
   }
 
   if (tempo_preparar < 0) {
@@ -95,7 +96,7 @@ function itemDrop(event, ui) {
 /* Inicia contador do jogo */
 const iniciar_contador = () => {
     tempo_restante = tempo
-    $("#time").text(tempo_restante)
+    $('#time').text(tempo_restante)
     thread_tempo = setInterval(function () {
         verificar_contador()
     }, 1000)
@@ -105,7 +106,7 @@ const iniciar_contador = () => {
 /* Verifica se contador não chegou ao fim */
 const verificar_contador = () => {
     tempo_restante--
-    $("#time").text(tempo_restante)
+    $('#time').text(tempo_restante)
 
     if (tempo_restante <= 0) {
         terminar_contador()
@@ -129,9 +130,9 @@ const conta_itens_tema = () => {
       count++
     }
   }
-
   return count
 }
+
 
 /* Acaba sessão do jogo limpando variáveis e removendo componentes */
 const fim_jogo = () => {

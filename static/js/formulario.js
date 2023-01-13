@@ -10,7 +10,6 @@ function add_categoria() {
       </button>
     <div>
   `
-
   $(category_input).insertBefore('#add-category')
 }
 
@@ -29,7 +28,6 @@ function addItem(item) {
       </button>
     <div>
   `
-
   $(item).parent().append(item_input)
 }
 
