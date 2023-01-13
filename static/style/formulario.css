@@ -26,6 +26,11 @@
   margin: 5px;
 }
 
+#create-theme, #update-theme {
+  display: flex;
+  justify-content: center;
+}
+
 button {
   margin: auto;
 }

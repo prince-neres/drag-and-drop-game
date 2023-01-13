@@ -2,88 +2,92 @@
 <div class="container" id="themes">
   <h2 class="title primary-color">Temas</h2>
   <p class="subtitle secondary-color">Escolha um tema para jogar:</p>
-  {% for tema in temas %}
-  <div class="card" style="width: 18rem">
-    <div class="card-body">
-      <h5 class="card-title">{{tema.name}}</h5>
-      <p class="card-text">{{tema.description}}</p>
+  <div class="row">
+    {% for tema in temas %}
+    <div class="col-sm-3">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{tema.name}}</h5>
+          <p class="card-text">{{tema.description}}</p>
 
-      <!--  Botão de jogar tema -->
-      <a href="/tema/{{tema._id}}">
-        <button
-          class="btn btn-success"
-          data-bs-toggle="tooltip"
-          data-bs-placement="bottom"
-          data-bs-title="Jogar tema"
-        >
-          <b>Jogar</b>
-        </button>
-      </a>
+          <!--  Botão de jogar tema -->
+          <a href="/tema/{{tema._id}}">
+            <button
+              class="btn btn-success"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              data-bs-title="Jogar tema"
+            >
+              <b>Jogar</b>
+            </button>
+          </a>
 
-      <!--  Botão de editar tema -->
-      <a href="/formulario/{{tema._id}}">
-        <button
-          class="btn btn-primary"
-          data-bs-toggle="tooltip"
-          data-bs-placement="bottom"
-          data-bs-title="Editar tema"
-        >
-          <i class="bi bi-pencil-fill"></i>
-        </button>
-      </a>
+          <!--  Botão de editar tema -->
+          <a href="/formulario/{{tema._id}}">
+            <button
+              class="btn btn-primary"
+              data-bs-toggle="tooltip"
+              data-bs-placement="bottom"
+              data-bs-title="Editar tema"
+            >
+              <i class="bi bi-pencil-fill"></i>
+            </button>
+          </a>
 
-      <!--  Botão de remover tema -->
-      <button
-        type="button"
-        class="btn btn-danger"
-        data-bs-toggle="modal"
-        data-bs-target="[id='{{tema._id}}']"
-        data-bs-title="Remover Tema"
-      >
-        <i class="bi bi-trash-fill"></i>
-      </button>
+          <!--  Botão de remover tema -->
+          <button
+            type="button"
+            class="btn btn-danger"
+            data-bs-toggle="modal"
+            data-bs-title="Remover Tema"
+            data-bs-target="[id='{{tema._id}}']"
+          >
+            <i class="bi bi-trash-fill"></i>
+          </button>
 
-      <!--  Modal para confirmar deleção no banco -->
-      <div
-        class="modal fade"
-        id="{{tema._id}}"
-        tabindex="0"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
-        <div class="modal-dialog modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
-            </div>
-            <div class="modal-body">Confirmar deleção?</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-danger"
-                data-bs-dismiss="modal"
-              >
-                Cancelar
-              </button>
-              <button
-                type="button"
-                class="btn btn-success"
-                onclick="remover_tema('{{tema._id}}')"
-                data-bs-dismiss="modal"
-              >
-                Confirmar
-              </button>
+          <!--  Modal para confirmar deleção no banco -->
+          <div
+            class="modal fade"
+            id="{{tema._id}}"
+            tabindex="0"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">Confirmar remoção?</div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-danger"
+                    data-bs-dismiss="modal"
+                  >
+                    Cancelar
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    onclick="remover_tema('{{tema._id}}')"
+                    data-bs-dismiss="modal"
+                  >
+                    Confirmar
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 </div>
 {% endblock content %}
