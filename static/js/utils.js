@@ -1,7 +1,3 @@
-const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-
-
 (function () {
   'use strict'
   var forms = document.querySelectorAll('.needs-validation')
@@ -18,6 +14,10 @@ const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstra
       }, false)
     })
 })()
+
+
+const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
 
 const count_items = (categories) => {
