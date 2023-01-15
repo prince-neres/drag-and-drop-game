@@ -3,6 +3,10 @@
   margin: 0 auto;
 }
 
+.about-description {
+  text-indent: 2em;
+}
+
 .testimonial-card {
   margin: 10px;
   width: 200px;
