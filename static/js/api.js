@@ -1,5 +1,5 @@
 const current_base = window.location.href
-const url_base = 'http://127.0.0.1:3000/'
+const url_base = 'http://localhost:5000/'
 
 
 function criar_tema(event) {
