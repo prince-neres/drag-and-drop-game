@@ -53,6 +53,7 @@ function criar_tema(event) {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         `
+        window.location.href = `http://localhost:5000`
       } else {
         alert = `
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
