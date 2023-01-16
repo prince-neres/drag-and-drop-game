@@ -8,9 +8,14 @@
   display: none;
 }
 
-.actions .{
+.actions {
   display: flex;
   justify-content: flex-end;
+}
+
+.action-item {
+  width: auto;
+  margin: 5px;
 }
 
 .infos {
