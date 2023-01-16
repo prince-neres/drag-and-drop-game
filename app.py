@@ -107,7 +107,9 @@ def update_theme(id):
             'name': data['name'],
             'description': data['description'],
             'categories': data['categories'],
-            'updated_date': now
+            'updated_date': now,
+            'private': data['private'],
+            'password': data['password']
           }
         }
         try:
