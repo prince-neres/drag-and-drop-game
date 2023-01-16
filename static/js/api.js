@@ -7,11 +7,19 @@ function criar_tema(event) {
   let name = $('#name').val()
   let description = $('#description').val()
   let categories = $('#groups #category-input')
+  let private = $('#private').is(':checked')
   let tema = {}
 
   tema.name = name
   tema.description = description
   tema.categories = []
+
+  if(private) {
+    tema.private = true
+    tema.password = $('#password').val()
+  } else {
+    tema.private = false
+  }
 
   $.each(categories, function(i, l) {
     category = {}
@@ -64,11 +72,19 @@ function editar_tema(_id) {
   let name = $('#name').val()
   let description = $('#description').val()
   let categories = $('#groups #category-input')
+  let private = $('#private').is(':checked')
   let tema = {}
 
   tema.name = name
   tema.description = description
   tema.categories = []
+
+  if(private) {
+    tema.private = true
+    tema.password = $('#password').val()
+  } else {
+    tema.private = false
+  }
 
   $.each(categories, function(i, l) {
     category = {}
@@ -121,7 +137,7 @@ function remover_tema(_id) {
     type: 'DELETE',
     url: `${url_base}delete_theme/${_id}`,
     success: function () {
-      document.location.reload(true)
+      window.location.href = `http://localhost:5000`
     }
   })
 }
@@ -144,4 +160,23 @@ function salvar_pontuacao (_id, pontuacao, erros, tempo) {
       console.log('Pontuação salva com sucesso!')
     }
   })
+}
+
+
+function check_senha (theme_password, theme_id) {
+  let password = $(`#${theme_id}-password`).val()
+
+  console.log(theme_password, password)
+
+  if (password === theme_password) {
+    window.location.href = `http://localhost:5000/tema/${theme_id}`
+  } else {
+    let alert = `
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+          <strong>Senha errada!</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      `
+    $(alert).insertBefore('#themes')
+  }
 }

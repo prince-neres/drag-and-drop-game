@@ -1,5 +1,70 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
+  <div class="actions">
+    <a href="/formulario/{{tema._id}}">
+      <button
+        class="btn btn-primary"
+        data-bs-toggle="tooltip"
+        data-bs-placement="bottom"
+        data-bs-title="Editar tema"
+      >
+        <b>Editar</b>
+        <i class="bi bi-pencil-fill"></i>
+      </button>
+    </a>
+
+    <!--  Botão de remover tema -->
+    <button
+      type="button"
+      class="btn btn-danger"
+      data-bs-toggle="modal"
+      data-bs-title="Remover Tema"
+      data-bs-target="[id='{{tema._id}}']"
+    >
+      <b>Remover</b>
+      <i class="bi bi-trash-fill"></i>
+    </button>
+
+    <!--  Modal para confirmar deleção no banco -->
+    <div
+      class="modal fade"
+      id="{{tema._id}}"
+      tabindex="0"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">Confirmar remoção?</div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              onclick="remover_tema('{{tema._id}}')"
+              data-bs-dismiss="modal"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="activity">
     <h2 class="activity-name">{{tema.name}}</h2>
     <h4 class="activity-description">{{tema.description}}</h4>

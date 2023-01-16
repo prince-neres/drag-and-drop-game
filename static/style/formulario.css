@@ -31,6 +31,10 @@
   justify-content: center;
 }
 
+form {
+  padding-bottom: 100px;
+}
+
 button {
   margin: auto;
 }

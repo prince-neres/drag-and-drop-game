@@ -1,3 +1,16 @@
+$('#private').change(function() {
+  if(this.checked) {
+    var password_input = `
+      <div id="password-input">
+        <label class="form-label" for="password"><strong>Senha:</strong></label>
+        <input type="password" class="form-control" id="password" placeholder="Digite uma senha"/>
+      </div>`
+    $(password_input).insertBefore('.private-checkbox')
+  } else {
+    $('#password-input').remove()
+  }    
+})
+
 function add_categoria() {
   var category_input = `
     <div id="category-input">

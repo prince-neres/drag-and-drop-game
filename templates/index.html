@@ -5,11 +5,12 @@
   <div class="row">
     {% for tema in temas %}
     <div class="col-sm-3">
-      <div class="card">
+      <div class="card card-theme">
         <div class="card-body">
           <h5 class="card-title">{{tema.name}}</h5>
           <p class="card-text">{{tema.description}}</p>
 
+          {% if not tema.private %}
           <!--  Botão de jogar tema -->
           <a href="/tema/{{tema._id}}">
             <button
@@ -22,30 +23,19 @@
             </button>
           </a>
 
-          <!--  Botão de editar tema -->
-          <a href="/formulario/{{tema._id}}">
-            <button
-              class="btn btn-primary"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              data-bs-title="Editar tema"
-            >
-              <i class="bi bi-pencil-fill"></i>
-            </button>
-          </a>
-
-          <!--  Botão de remover tema -->
+          {% else %}
+          <!--  Botão de inserir senha para jogar -->
           <button
             type="button"
-            class="btn btn-danger"
+            class="btn btn-warning"
             data-bs-toggle="modal"
-            data-bs-title="Remover Tema"
+            data-bs-title="Jogar"
             data-bs-target="[id='{{tema._id}}']"
           >
-            <i class="bi bi-trash-fill"></i>
+            <b>Jogar</b>
+            <i class="bi bi-lock-fill"></i>
           </button>
 
-          <!--  Modal para confirmar deleção no banco -->
           <div
             class="modal fade"
             id="{{tema._id}}"
@@ -63,7 +53,17 @@
                     aria-label="Close"
                   ></button>
                 </div>
-                <div class="modal-body">Confirmar remoção?</div>
+                <div class="modal-body">
+                  <label class="form-label" for="{{tema._id}}-password"
+                    ><strong>Senha:</strong></label
+                  >
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="{{tema._id}}-password"
+                    placeholder="Digite uma senha"
+                  />
+                </div>
                 <div class="modal-footer">
                   <button
                     type="button"
@@ -75,7 +75,7 @@
                   <button
                     type="button"
                     class="btn btn-success"
-                    onclick="remover_tema('{{tema._id}}')"
+                    onclick="check_senha('{{tema.password}}', '{{tema._id}}')"
                     data-bs-dismiss="modal"
                   >
                     Confirmar
@@ -84,6 +84,7 @@
               </div>
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>

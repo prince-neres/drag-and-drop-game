@@ -3,6 +3,8 @@ from flask import jsonify
 
 def validate_theme(data):
   name = data['name']
+  private = data['private']
+  password = data['password'] if 'password' in data else None
   description = data['description']
   categories = data['categories']
 
@@ -14,6 +16,9 @@ def validate_theme(data):
     return False, response
   elif not description:
     response = jsonify({'error': 'A descrição não pode ficar em branco!'})
+    return False, response
+  elif private and not password:
+    response = jsonify({'error': 'Temas privados precisam de senha!'})
     return False, response
   elif len(categories) < 2:
     response = jsonify({'error': 'Erro temas não podem ter menos de 2 categorias!'})

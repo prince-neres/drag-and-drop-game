@@ -8,6 +8,11 @@
   display: none;
 }
 
+.actions .{
+  display: flex;
+  justify-content: flex-end;
+}
+
 .infos {
   display: flex;
   flex-direction: row;

@@ -30,6 +30,27 @@
       <div class="invalid-feedback">Esse campo não pode estar em branco</div>
     </div>
     <div class="mb-3">
+      <div class="custom-control custom-checkbox private-checkbox">
+        <input
+          type="checkbox"
+          class="custom-control-input"
+          id="private"
+          checked="{{tema.private}}"
+        />
+        <label class="custom-control-label" for="private">Privado</label>
+      </div>
+      <div id="password-input">
+        <label class="form-label" for="password"><strong>Senha:</strong></label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          placeholder="Digite uma senha"
+          value="{{tema.password}}"
+        />
+      </div>
+    </div>
+    <div class="mb-3">
       <label class="form-label"><strong>Categorias e Items</strong></label>
       <p>Crie as categorias do tema e adicione os seus items.</p>
       <div id="groups" class="mb-3">
