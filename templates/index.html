@@ -11,76 +11,40 @@
       <div class="card card-theme">
         <div class="card-body">
           <h5 class="card-title">{{tema.name}}</h5>
-          <hr />
           <p class="card-text">{{tema.description}}</p>
           {% if not tema.private %}
-            <!--  Botão de jogar tema -->
-            <a href="/tema/{{tema._id}}">
-              <button
-                class="btn btn-success"
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                data-bs-title="Jogar tema"
-              >
-                <i class="bi bi-play-fill"></i>
-                <b>Jogar</b>
-              </button>
-            </a>
+          <!--  Botão de jogar tema -->
+          <a href="/tema/{{tema._id}}">
+            <button class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="bottom">
+              <i class="bi bi-play-fill"></i>
+              <b>Jogar</b>
+            </button>
+          </a>
           {% else %}
           <!--  Botão de inserir senha para jogar -->
-          <button
-            type="button"
-            class="btn btn-warning"
-            data-bs-toggle="modal"
-            data-bs-title="Jogar"
-            data-bs-target="[id='{{tema._id}}']"
-          >
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-title="Jogar"
+            data-bs-target="[id='{{tema._id}}']">
             <i class="bi bi-lock-fill"></i>
             <b>Jogar</b>
           </button>
 
-          <div
-            class="modal fade"
-            id="{{tema._id}}"
-            tabindex="0"
-            aria-labelledby="exampleModalLabel"
-            aria-hidden="true"
-          >
+          <div class="modal fade" id="{{tema._id}}" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
               <div class="modal-content">
                 <div class="modal-header">
-                  <button
-                    type="button"
-                    class="btn-close"
-                    data-bs-dismiss="modal"
-                    aria-label="Close"
-                  ></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <label class="form-label" for="{{tema._id}}-password"
-                    ><strong>Digite a Senha:</strong></label
-                  >
-                  <input
-                    type="password"
-                    class="form-control"
-                    id="{{tema._id}}-password"
-                    placeholder="Digite uma senha"
-                  />
+                  <label class="form-label" for="{{tema._id}}-password"><strong>Digite a Senha:</strong></label>
+                  <input type="password" class="form-control" id="{{tema._id}}-password"
+                    placeholder="Digite uma senha" />
                 </div>
                 <div class="modal-footer">
-                  <button
-                    type="button"
-                    class="btn btn-danger"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
                     Cancelar
                   </button>
-                  <button
-                    type="button"
-                    class="btn btn-success"
-                    onclick="check_senha('{{tema.password}}', '{{tema._id}}')"
-                    data-bs-dismiss="modal"
-                  >
+                  <button type="button" class="btn btn-success"
+                    onclick="check_senha('{{tema.password}}', '{{tema._id}}')" data-bs-dismiss="modal">
                     Confirmar
                   </button>
                 </div>

@@ -15,7 +15,7 @@ $('[id="start-game"]').click(function () {
   embaralha_items()
   terminar_contador()
   $('#start').removeClass('hide')
-  $('.item').animate({top: '0px',left: '0px'})
+  $('.item').animate({ top: '0px', left: '0px' })
   pontuacao = 0
   $('#points').text(pontuacao)
   erros = 0
@@ -26,7 +26,7 @@ $('[id="start-game"]').click(function () {
   tempo_preparar = 3
   $('#start').html('<b><p>Prepare-se...</p><h1>' + tempo_preparar + '</h1></b>')
   thread_tempo = setInterval(function () {
-      preparacao()
+    preparacao()
   }, 1000)
 
   $('.item').draggable(
@@ -53,16 +53,16 @@ const preparacao = () => {
   tempo_preparar--
 
   if (tempo_preparar == 0) {
-      $('#start').html('<b><p style="font-size:30px">Valendo...</p></b>')
+    $('#start').html('<b><p style="font-size:30px">Valendo...</p></b>')
   } else {
-      $('#start').html('<b><p>Prepare-se...</p><h1>' + tempo_preparar + '</h1></b>')
+    $('#start').html('<b><p>Prepare-se...</p><h1>' + tempo_preparar + '</h1></b>')
   }
 
   if (tempo_preparar < 0) {
-      clearInterval(thread_tempo)
-      tempo_preparar = 3
-      comecar_jogo()
-      return
+    clearInterval(thread_tempo)
+    tempo_preparar = 3
+    comecar_jogo()
+    return
   }
 }
 
@@ -82,7 +82,7 @@ function itemDrop(event, ui) {
   var slotCategoria = $(this)
   var cardItem = ui.draggable
 
-  if(slotCategoria.attr('name') === cardItem.attr('categoria')){
+  if (slotCategoria.attr('name') === cardItem.attr('categoria')) {
     ui.draggable.draggable('option', 'revert', false)
     pontuacao++
     $('#points').text(pontuacao)
@@ -97,30 +97,30 @@ function itemDrop(event, ui) {
 
 /* Inicia contador do jogo */
 const iniciar_contador = () => {
-    tempo_restante = tempo
-    $('#time').text(tempo_restante)
-    thread_tempo = setInterval(function () {
-        verificar_contador()
-    }, 1000)
+  tempo_restante = tempo
+  $('#time').text(tempo_restante)
+  thread_tempo = setInterval(function () {
+    verificar_contador()
+  }, 1000)
 }
 
 
 /* Verifica se contador não chegou ao fim */
 const verificar_contador = () => {
-    tempo_restante--
-    $('#time').text(tempo_restante)
+  tempo_restante--
+  $('#time').text(tempo_restante)
 
-    if (tempo_restante <= 0) {
-        terminar_contador()
-        fim_jogo()
-    }
+  if (tempo_restante <= 0) {
+    terminar_contador()
+    fim_jogo()
+  }
 }
 
 
 /* Termina contador */
 const terminar_contador = () => {
-    clearInterval(thread_tempo)
-    tempo_restante = tempo
+  clearInterval(thread_tempo)
+  tempo_restante = tempo
 }
 
 
@@ -128,7 +128,7 @@ const conta_itens_tema = () => {
   let count = 0
 
   for (let categoria of categorias) {
-    for(let item in categoria['items']) {
+    for (let item in categoria['items']) {
       count++
     }
   }
@@ -141,6 +141,10 @@ const fim_jogo = () => {
   $('#end').removeClass('hide')
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
+  let score = pontuacao + tempo_restante - erros
+  let score_text = `Pontuação: ${score}`
+  $('#score-show').text(score_text)
+  score > Number($('#errors').val()) ? $('#record').text(score) : null
   salvar_pontuacao(tema_id, pontuacao, erros, tempo_restante)
   terminar_contador()
 }
@@ -148,6 +152,6 @@ const fim_jogo = () => {
 const embaralha_items = () => {
   var items = document.querySelector('.items')
   for (var i = items.children.length; i >= 0; i--) {
-      items.appendChild(items.children[Math.random() * i | 0])
+    items.appendChild(items.children[Math.random() * i | 0])
   }
 }
