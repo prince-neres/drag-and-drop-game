@@ -1,120 +1,133 @@
 {% extends 'base.html' %} {% block content %}
-<div class="container" id="edicao">
-  <h2>Formulário de tema</h2>
-  <form class="needs-validation" novalidate>
-    <div class="mb-3 w-25">
-      <label for="name" class="form-label"><strong>Nome do Tema</strong></label>
-      <input
-        id="name"
-        type="text"
-        class="form-control"
-        placeholder="Nome do tema"
-        value="{{tema.name}}"
-        required
-      />
-      <div class="invalid-feedback">Esse campo não pode estar em branco</div>
-    </div>
-    <div class="mb-3">
-      <label for="description" class="form-label"
-        ><strong>Descrição</strong></label
-      >
-      <textarea
-        class="form-control"
-        id="description"
-        rows="3"
-        placeholder="Descrição para o tema"
-        required
-      >
-        {{tema.description}}
-      </textarea>
-      <div class="invalid-feedback">Esse campo não pode estar em branco</div>
-    </div>
-    <div class="mb-3">
-      <div class="custom-control custom-checkbox private-checkbox">
+  <div class="container" id="edicao">
+    <h3>Formulário de tema</h3>
+    <hr />
+    <form class="needs-validation" novalidate>
+      <div class="mb-3 w-25">
+        <label for="name" class="form-label">
+          <strong>Nome do Tema</strong>
+        </label>
         <input
-          type="checkbox"
-          class="custom-control-input"
-          id="private"
-          checked="{{tema.private}}"
-        />
-        <label class="custom-control-label" for="private">Privado</label>
-      </div>
-      <div id="password-input">
-        <label class="form-label" for="password"><strong>Senha:</strong></label>
-        <input
-          type="password"
+          id="name"
+          type="text"
           class="form-control"
-          id="password"
-          placeholder="Digite uma senha"
-          value="{{tema.password}}"
+          placeholder="Nome do tema"
+          value="{{tema.name}}"
         />
+        <div class="invalid-feedback">Esse campo não pode estar em branco</div>
       </div>
-    </div>
-    <div class="mb-3">
-      <label class="form-label"><strong>Categorias e Items</strong></label>
-      <p>Crie as categorias do tema e adicione os seus items.</p>
-      <div id="groups" class="mb-3">
-        {% with categories=tema.categories %} {% for category in categories %}
-        <div id="category-input">
-          <button
-            type="button"
-            id="remove-category"
-            class="btn btn-danger"
-            onclick="remove_categoria(this)"
-          >
-            <i class="bi bi-trash-fill"></i>
-          </button>
-          <input
-            id="category-name"
-            class="form-control"
-            placeholder="Categoria"
-            value="{{category.name}}"
-            required
-          />
-          <button
-            type="button"
-            id="add-item"
-            onclick="add_item(this)"
-            class="btn btn-primary"
-          >
-            <i class="bi bi-plus-square"></i>
-          </button>
-          {% with items=category['items'] %} {% for item in items %}
-          <div id="item-input">
+      <div class="mb-3">
+        <label for="description" class="form-label">
+          <strong>Descrição</strong>
+        </label>
+        <textarea 
+          class="form-control"
+          id="description"
+          rows="3"
+          placeholder="Descrição para o tema"
+        >{{tema.description}}</textarea>
+        <div class="invalid-feedback">Esse campo não pode estar em branco</div>
+      </div>
+      <div class="mb-3">
+        {% if tema.private %}
+          <div class="custom-control custom-checkbox private-checkbox">
             <input
-              id="item-name"
-              class="form-control"
-              placeholder="Item da Categoria"
-              value="{{item.name}}"
-              required
+              type="checkbox"
+              class="custom-control-input"
+              id="private"
+              checked
             />
-            <button
-              type="button"
-              id="remove-item"
-              class="btn btn-danger"
-              onclick="remove_item(this)"
-            >
-              <i class="bi bi-trash-fill"></i>
-            </button>
+            <label class="custom-control-label" for="private">Privado</label>
           </div>
-          {% endfor %} {% endwith %}
+          <div id="password-input">
+            <label class="form-label" for="password"><strong>Senha:</strong></label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Digite uma senha"
+              value="{{tema.password}}"
+            />
+          </div>
+        {% else %}
+          <div class="custom-control custom-checkbox private-checkbox">
+            <input type="checkbox" class="custom-control-input" id="private" />
+            <label class="custom-control-label" for="private">Privado</label>
+          </div>
+        {% endif %}
+      </div>
+      <div class="mb-3">
+        <label class="form-label">
+          <strong>Categorias e Items </strong>
+          <i class="bi bi-diagram-3-fill"></i>
+        </label>
+        <p>Crie as categorias do tema e adicione os seus items.</p>
+        <div id="groups" class="mb-3">
+          {% with categories=tema.categories %} 
+            {% for category in categories %}
+              <div id="category-input">
+                <button
+                  type="button"
+                  id="remove-category"
+                  class="btn btn-danger"
+                  onclick="remove_categoria(this)"
+                >
+                  <i class="bi bi-trash-fill"></i>
+                </button>
+                <input
+                  id="category-name"
+                  class="form-control"
+                  placeholder="Categoria"
+                  value="{{category.name}}"
+                />
+                <button
+                  type="button"
+                  id="add-item"
+                  onclick="add_item(this)"
+                  class="btn btn-primary"
+                >
+                  <i class="bi bi-plus"></i>
+                </button>
+            {% with items=category['items'] %}
+              {% for item in items %}
+                <div id="item-input">
+                  <input
+                    id="item-name"
+                    class="form-control"
+                    placeholder="Item da Categoria"
+                    value="{{item.name}}"
+                  />
+                  <button
+                    type="button"
+                    id="remove-item"
+                    class="btn btn-danger"
+                    onclick="remove_item(this)"
+                  >
+                    <i class="bi bi-trash-fill"></i>
+                  </button>
+                </div>
+              {% endfor %}
+            {% endwith %}
+              </div>
+            {% endfor %} 
+          {% endwith %}
+          <button
+            type="button"
+            id="add-category"
+            class="btn btn-success"
+            onclick="add_categoria()"
+          >
+            Adicionar Categoria 
+            <i class="bi bi-plus"></i>
+          </button>
         </div>
-        {% endfor %} {% endwith %}
-        <button
-          type="button"
-          id="add-category"
-          class="btn btn-success"
-          onclick="add_categoria()"
-        >
-          Adicionar Categoria
+      </div>
+      <div class="mb-3" id="update-theme">
+        <button class="btn btn-primary" onclick="editar_tema('{{tema._id}}')">
+          Salvar 
+          <i class="bi bi-save2"></i>
         </button>
       </div>
-    </div>
-    <div class="mb-3" id="update-theme">
-      <button class="btn btn-primary" onclick="editar_tema('{{tema._id}}')">
-        Editar
-      </button>
-    </div>
-  </form>
-</div>
+    </form>
+  </div>
 {% endblock content %}

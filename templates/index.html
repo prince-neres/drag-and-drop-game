@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container" id="themes">
-  <h2 class="title primary-color">Temas</h2>
+  <h3 class="title primary-color">
+    Temas <i class="bi bi-diagram-3-fill"></i>
+  </h3>
+  <hr />
   <p class="subtitle secondary-color">Escolha um tema para jogar:</p>
   <div class="row">
     {% for tema in temas %}
@@ -8,21 +11,21 @@
       <div class="card card-theme">
         <div class="card-body">
           <h5 class="card-title">{{tema.name}}</h5>
+          <hr />
           <p class="card-text">{{tema.description}}</p>
-
           {% if not tema.private %}
-          <!--  Botão de jogar tema -->
-          <a href="/tema/{{tema._id}}">
-            <button
-              class="btn btn-success"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              data-bs-title="Jogar tema"
-            >
-              <b>Jogar</b>
-            </button>
-          </a>
-
+            <!--  Botão de jogar tema -->
+            <a href="/tema/{{tema._id}}">
+              <button
+                class="btn btn-success"
+                data-bs-toggle="tooltip"
+                data-bs-placement="bottom"
+                data-bs-title="Jogar tema"
+              >
+                <i class="bi bi-play-fill"></i>
+                <b>Jogar</b>
+              </button>
+            </a>
           {% else %}
           <!--  Botão de inserir senha para jogar -->
           <button
@@ -32,8 +35,8 @@
             data-bs-title="Jogar"
             data-bs-target="[id='{{tema._id}}']"
           >
-            <b>Jogar</b>
             <i class="bi bi-lock-fill"></i>
+            <b>Jogar</b>
           </button>
 
           <div
@@ -55,7 +58,7 @@
                 </div>
                 <div class="modal-body">
                   <label class="form-label" for="{{tema._id}}-password"
-                    ><strong>Senha:</strong></label
+                    ><strong>Digite a Senha:</strong></label
                   >
                   <input
                     type="password"

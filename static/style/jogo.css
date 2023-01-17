@@ -41,7 +41,7 @@
   color: #FFF;
   margin: 10px;
   padding: 20px;
-  background-color: #4a4e69;
+  background-color: rgb(60, 60, 60);
   text-align: center;
   align-items: center;
   border-radius: 5px;
@@ -59,7 +59,7 @@
   color: #FFF;
   margin: 10px;
   padding: 20px;
-  background-color: #22223b;
+  background-color: rgb(10, 10, 10);
   text-align: center;
   z-index: 1000;
   border-radius: 5px;

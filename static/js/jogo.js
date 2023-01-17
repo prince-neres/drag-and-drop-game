@@ -12,6 +12,8 @@ var items_count = 0
 
 /* Começa contagem regressiva de 3 segundos para o início do jogo */
 $('[id="start-game"]').click(function () {
+  embaralha_items()
+  terminar_contador()
   $('#start').removeClass('hide')
   $('.item').animate({top: '0px',left: '0px'})
   pontuacao = 0
@@ -141,4 +143,11 @@ const fim_jogo = () => {
   $('#board-game').addClass('hide')
   salvar_pontuacao(tema_id, pontuacao, erros, tempo_restante)
   terminar_contador()
+}
+
+const embaralha_items = () => {
+  var items = document.querySelector('.items')
+  for (var i = items.children.length; i >= 0; i--) {
+      items.appendChild(items.children[Math.random() * i | 0])
+  }
 }

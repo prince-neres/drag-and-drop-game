@@ -8,7 +8,11 @@ body {
 }
 
 nav {
-  background: linear-gradient(40deg, #000000, #3e3e3e) !important;
+  background: rgb(10, 10, 10);
+}
+
+li {
+  display: block;
 }
 
 .container {

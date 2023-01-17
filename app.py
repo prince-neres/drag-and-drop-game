@@ -32,8 +32,6 @@ def game(id):
     record = [record for record in find_record]
     record = record[0] if record else 0
 
-    print(record)
-
     if theme:
         categories = theme['categories']
         items = []
@@ -42,7 +40,6 @@ def game(id):
             for item in category['items']:
                 item['category'] = category['name']
                 items.append(item)
-        shuffle(items)
 
         return render_template('jogo.html', tema=theme, categories=categories, items=items, record=record)
     else:
@@ -100,6 +97,7 @@ def update_theme(id):
     data = request.get_json()
     now = datetime.now()
     validate, response = validate_theme(data)
+    password = data['password'] if 'password' in data else None 
 
     if validate:
         theme = {
@@ -109,7 +107,7 @@ def update_theme(id):
             'categories': data['categories'],
             'updated_date': now,
             'private': data['private'],
-            'password': data['password']
+            'password': password
           }
         }
         try:

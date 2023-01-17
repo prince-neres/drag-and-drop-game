@@ -1,6 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 <div class="container">
   <div class="actions">
+    <!--  Botão de editar tema -->
     <div class="action-item">
       <a href="/formulario/{{tema._id}}">
         <button
@@ -42,8 +43,7 @@
               type="button"
               class="btn-close"
               data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
+              aria-label="Close"></button>
           </div>
           <div class="modal-body">Confirmar remoção?</div>
           <div class="modal-footer">
@@ -68,29 +68,37 @@
     </div>
   </div>
   <div class="activity">
-    <h2 class="activity-name">{{tema.name}}</h2>
-    <h4 class="activity-description">{{tema.description}}</h4>
+    <h3 class="activity-name">{{tema.name}}</h3>
+    <p class="activity-description">{{tema.description}}</p>
   </div>
   <div class="infos">
-    <h5>Pontuação: <span class="badge bg-secondary" id="points">0</span></h5>
-    <h5>Erros: <span class="badge bg-secondary" id="errors">0</span></h5>
-    <h5>Recorde: <span class="badge bg-secondary" id="record">{{record.final_score or 0}}</span></h5>
-    <h5>Tempo: <span class="badge bg-secondary" id="time">0</span></h5>
+    <h5><i class="bi bi-check"></i> Pontuação: <span class="badge bg-secondary" id="points">0</span></h5>
+    <h5><i class="bi bi-x"></i> Erros: <span class="badge bg-secondary" id="errors">0</span></h5>
+    <h5><i class="bi bi-trophy-fill"></i> Recorde: <span class="badge bg-secondary" id="record">{{record.final_score or 0}}</span></h5>
+    <h5><i class="bi bi-hourglass-split"></i> Tempo: <span class="badge bg-secondary" id="time">0</span></h5>
   </div>
   <!-- Ínicio de jogo -->
   <div id="start" class="box">
-    <button id="start-game" type="button" class="btn btn-success"><b>Jogar</b></button>
+    <button id="start-game" type="button" class="btn btn-success">
+      <i class="bi bi-play-fill"></i>
+      <b> Jogar</b>
+    </button>
   </div>
   <!-- Preparação -->
   <div id="start" class="box hide"></div>
   <!-- Reset -->
   <div id="reset" class="box hide">
-    <button id="start-game" type="button" class="btn btn-success"><b>Resetar</b></button>
+    <button id="start-game" type="button" class="btn btn-success">
+      <b>Resetar </b>
+      <i class="bi bi-arrow-repeat"></i>
+    </button>
   </div>
   <!-- Fim do jogo -->
   <div id="end" class="box hide">
     <h1>Fim do Jogo</h1>
-    <button id="start-game" type="button" class="btn btn-success"><b>Jogar Novamente</b></button>
+    <button id="start-game" type="button" class="btn btn-success">
+      <i class="bi bi-play-fill"></i>
+      <b> Jogar Novamente</b></button>
   </div>
   <!-- Area do jogo -->
   <div class="board-game hide" id="board-game">
