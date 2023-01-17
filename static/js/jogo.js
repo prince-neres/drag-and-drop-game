@@ -111,8 +111,8 @@ const verificar_contador = () => {
   $('#time').text(tempo_restante)
 
   if (tempo_restante <= 0) {
-    terminar_contador()
     fim_jogo()
+    terminar_contador()
   }
 }
 
@@ -142,6 +142,7 @@ const fim_jogo = () => {
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
   let score = pontuacao + tempo_restante - erros
+  console.log(score = pontuacao, tempo_restante, erros)
   let score_text = `Pontuação: ${score}`
   $('#score-show').text(score_text)
   score > Number($('#errors').val()) ? $('#record').text(score) : null
