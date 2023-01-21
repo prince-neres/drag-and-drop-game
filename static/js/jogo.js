@@ -142,10 +142,10 @@ const fim_jogo = () => {
   $('#reset').addClass('hide')
   $('#board-game').addClass('hide')
   let score = pontuacao + tempo_restante - erros
-  console.log(score = pontuacao, tempo_restante, erros)
   let score_text = `Pontuação: ${score}`
+  let record = Number($('#record').text())
   $('#score-show').text(score_text)
-  score > Number($('#errors').val()) ? $('#record').text(score) : null
+  score > record ? $('#record').text(score) : null
   salvar_pontuacao(tema_id, pontuacao, erros, tempo_restante)
   terminar_contador()
 }
