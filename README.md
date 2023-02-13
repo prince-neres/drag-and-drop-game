@@ -8,11 +8,10 @@ Esse é um sistema resultante do TCC para conclusão do curso de Sistemas para I
 ### Frontend
 * [jQuery](https://jquery.com/)
 
-## Banco de Dados
+### Banco de Dados
 * [MongoDB](https://www.mongodb.com/docs/manual/reference/program/mongod/)
 
-
-### Como rodar  
+## Como rodar  
 No diretório do projeto execute os seguintes comandos:
 
 `python3 -m venv venv`  
