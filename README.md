@@ -7,6 +7,7 @@ Esse é um sistema resultante do TCC para conclusão do curso de Sistemas para I
 
 ### Frontend
 * [jQuery](https://jquery.com/)
+* [Bootstrap](https://getbootstrap.com/)
 
 ### Banco de Dados
 * [MongoDB](https://www.mongodb.com/docs/manual/reference/program/mongod/)
