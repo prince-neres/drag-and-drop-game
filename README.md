@@ -1,6 +1,28 @@
 ## Sobre
 Esse é um sistema resultante do TCC para conclusão do curso de Sistemas para Internet que tem como título Jogo educacional de Associação de Coneitos.
 
+## Telas
+
+<h3 align="center">Tela inicial</h3>
+<div align="center">
+  <img src="static/imgs/previews/temas.png" >
+</div>
+
+<h3 align="center">Formulário de temas</h3>
+<div align="center">
+  <img src="static/imgs/previews/formulario.png" >
+</div>
+
+<h3 align="center">Tela de jogo</h3>
+<div align="center">
+  <img src="static/imgs/previews/jogo.png" >
+</div>
+
+<h3 align="center">Sobre</h3>
+<div align="center">
+  <img src="static/imgs/previews/sobre.png" >
+</div>
+
 ## Tecnologias usadas:
 ### Backend
 * [Flask](https://flask.palletsprojects.com/en/2.2.x/)
