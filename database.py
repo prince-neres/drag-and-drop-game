@@ -1,10 +1,12 @@
 from pymongo import MongoClient
 import certifi
+import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
-MONGO_URI = 'mongodb+srv://flask:BgFuKCPs06zEM3xr@project-game.4cpmyde.mongodb.net/?retryWrites=true&w=majority'
+MONGO_URI = os.getenv("MONGO_URI")
 ca = certifi.where()
-
 
 def dbConnection():
     try:
