@@ -1,15 +1,15 @@
-$('#private').change(function() {
-  if(this.checked) {
+$("#private").change(function () {
+  if (this.checked) {
     var password_input = `
       <div id="password-input">
         <label class="form-label" for="password"><strong>Senha:</strong></label>
         <input type="password" class="form-control" id="password" placeholder="Digite uma senha"/>
-      </div>`
-    $(password_input).insertBefore('.private-checkbox')
+      </div>`;
+    $(password_input).insertBefore(".private-checkbox");
   } else {
-    $('#password-input').remove()
-  }    
-})
+    $("#password-input").remove();
+  }
+});
 
 function add_categoria() {
   var category_input = `
@@ -22,15 +22,13 @@ function add_categoria() {
         <i class="bi bi-plus-square"></i>
       </button>
     <div>
-  `
-  $(category_input).insertBefore('#add-category')
+  `;
+  $(category_input).insertBefore("#add-category");
 }
-
 
 function remove_categoria(category) {
-  $(category).parent().remove()
+  $(category).parent().remove();
 }
-
 
 function addItem(item) {
   var item_input = `
@@ -40,11 +38,10 @@ function addItem(item) {
         <i class="bi bi-trash-fill"></i>
       </button>
     <div>
-  `
-  $(item).parent().append(item_input)
+  `;
+  $(item).parent().append(item_input);
 }
 
-
 function remove_item(item) {
-  $(item).parent().remove()
+  $(item).parent().remove();
 }

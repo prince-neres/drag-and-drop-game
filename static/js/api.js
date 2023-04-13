@@ -1,5 +1,5 @@
 const current_base = window.location.href;
-const url_base = "http://localhost:3000/";
+const url_base = "http://localhost:3000";
 
 function criar_tema(event) {
   event.preventDefault();
@@ -38,7 +38,7 @@ function criar_tema(event) {
 
   $.ajax({
     type: "POST",
-    url: `${url_base}create_theme`,
+    url: `${url_base}/create_theme`,
     data: JSON.stringify(tema),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -66,7 +66,7 @@ function criar_tema(event) {
   });
 }
 
-function editar_tema(_id) {
+function editar_tema(_id, event) {
   event.preventDefault();
   let name = $("#name").val();
   let description = $("#description").val();
@@ -103,7 +103,7 @@ function editar_tema(_id) {
 
   $.ajax({
     type: "PUT",
-    url: `${url_base}update_theme/${_id}`,
+    url: `${url_base}/update_theme/${_id}`,
     data: JSON.stringify(tema),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -133,9 +133,9 @@ function editar_tema(_id) {
 function remover_tema(_id) {
   $.ajax({
     type: "DELETE",
-    url: `${url_base}delete_theme/${_id}`,
+    url: `${url_base}/delete_theme/${_id}`,
     success: function () {
-      window.location.href = `http://localhost:3000`;
+      window.location.href = url_base;
     },
   });
 }
@@ -149,7 +149,7 @@ function salvar_pontuacao(_id, pontuacao, erros, tempo) {
 
   $.ajax({
     type: "POST",
-    url: `${url_base}save_score`,
+    url: `${url_base}/save_score`,
     data: JSON.stringify(req_obj),
     contentType: "application/json; charset=utf-8",
     dataType: "json",
@@ -165,7 +165,7 @@ function check_senha(theme_password, theme_id) {
   console.log(theme_password, password);
 
   if (password === theme_password) {
-    window.location.href = `http://localhost:3000/tema/${theme_id}`;
+    window.location.href = `${url_base}/tema/${theme_id}`;
   } else {
     let alert = `
         <div class="alert alert-danger alert-dismissible fade show" role="alert">
