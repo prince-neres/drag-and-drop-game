@@ -1,5 +1,5 @@
 const current_base = window.location.href;
-const url_base = "http://localhost:3000";
+const url_base = "https://drag-and-drop.onrender.com";
 
 function criar_tema(event) {
   event.preventDefault();
@@ -52,7 +52,7 @@ function criar_tema(event) {
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
         `;
-        window.location.href = `http://localhost:3000`;
+        window.location.href = url_base;
       } else {
         alert = `
           <div class="alert alert-danger alert-dismissible fade show" role="alert">
