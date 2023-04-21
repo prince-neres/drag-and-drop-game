@@ -6,6 +6,7 @@ import os
 MONGO_URI = os.getenv("MONGO_URI")
 ca = certifi.where()
 
+
 def dbConnection():
     try:
         client = MongoClient(MONGO_URI)
